@@ -1,0 +1,167 @@
+ The King 👑: <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أكاديمية البرمجة</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
+  line-height: 1.7;
+}
+
+header {
+  background: #1e293b;
+  padding: 25px 15px;
+  text-align: center;
+  border-bottom: 2px solid #334155;
+}
+
+header h1 {
+  color: #38bdf8;
+  margin: 0;
+}
+
+.container {
+  max-width: 1050px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  border: 1px solid #334155;
+}
+
+h2 {
+  color: #38bdf8;
+  margin-top: 0;
+}
+
+button {
+  backgro… The King 👑: const lessonExercises = {
+  1: {
+    question: "اكتب كود HTML ينشئ عنواناً نصه Hello",
+    placeholder: "اكتب كود HTML هنا",
+    check: code => /<h1>\s*Hello\s*<\/h1>/i.test(code.trim())
+  },
+
+  2: {
+    question: "اكتب رابطاً باستخدام a يفتح example.com",
+    placeholder: "اكتب كود HTML هنا",
+    check: code => /<a\s+href=["']https:\/\/example\.com["'][^>]>[\s\S]?<\/a>/i.test(code.trim())
+  },
+
+  3: {
+    question: "اكتب كود CSS يجعل لون النص أحمر",
+    placeholder: "اكتب كود CSS هنا",
+    check: code => /color\s*:\s*red\s*;?/i.test(code)
+  },
+
+  4: {
+    question: "اكتب كود CSS يجعل خلفية الصفحة زرقاء",
+    placeholder: "اكتب كود CSS هنا",
+    check: code => /background(?:-color)?\s*:\s*blue\s*;?/i.test(code)
+  },
+
+  5: {
+    question: "أنشئ متغيراً اسمه a…
+] The King 👑: .exercise-box {
+  background: #020617;
+  border: 1px solid #38bdf8;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 18px;
+}
+
+.exercise-box h3 {
+  color: #38bdf8;
+}
+
+.exercise-box textarea {
+  width: 100%;
+  min-height: 120px;
+  margin: 12px 0;
+}
+
+.exercise-result {
+  font-weight: bold;
+  margin-top: 10px;
+} The King 👑: function getNextLesson() {
+  for (const lesson of lessons) {
+    if (!completed.includes(lesson.id)) {
+      return lesson.id;
+    }
+  }
+  return null;
+}
+
+function submitExercise(id) {
+  const textarea = document.getElementById("exercise-" + id);
+  const result = document.getElementById("exercise-result-" + id);
+
+  if (!textarea || !result) return;
+
+  const code = textarea.value;
+  const exercise = lessonExercises[id];
+
+  if (!exercise) return;
+
+  if (exercise.check(code)) {
+    result.textContent = "إجابة صحيحة! تم فتح الدرس التالي 🎉";
+    result.className = "exercise-result success";
+
+    if (!completed.includes(id)) {
+      completed.push(id);
+      points += 10;
+      saveData();
+      updateDashboard();
+      renderLessons();
+    }
+  } else {
+    result… The King 👑: function renderLessons(category = "all") {
+  const container = document.getElementById("lessons");
+  const nextLesson = getNextLesson();
+
+  const filtered = lessons.filter(lesson =>
+    category === "all" || lesson.category === category
+  );
+
+  container.innerHTML = filtered.map(lesson => {
+    const isDone = completed.includes(lesson.id);
+    const isUnlocked = isDone || lesson.id === nextLesson;
+    const exercise = lessonExercises[lesson.id];
+
+    return `
+      <div class="lesson-item">
+        <p class="muted">${lesson.category}</p>
+        <h3>${lesson.id}. ${lesson.title}</h3>
+        <p>${lesson.description}</p>
+
+        ${!isUnlocked ? `
+          <p class="error">🔒 أكمل الدرس السابق أولاً</p>
+        ` : `
+          <pre>${escapeHTML(lesson.code)}<…
+ The King 👑: const lessons = [
+  // HTML - 15 فصل
+  ...[
+    ["مقدمة HTML", "تعرف على لغة HTML وبناء صفحات الويب.", "<h1>Hello World</h1>"],
+    ["العناوين", "تعلم استخدام العناوين من h1 إلى h6.", "<h1>عنوان رئيسي</h1>\n<h2>عنوان فرعي</h2>"],
+    ["الفقرات", "تعلم كتابة النصوص والفقرات.", "<p>هذه فقرة تعليمية.</p>"],
+    ["الروابط", "تعلم إنشاء روابط للمواقع.", '<a href="https://example.com">اضغط هنا</a>'],
+    ["الصور", "تعلم إضافة الصور إلى الصفحة.", '<img src="image.jpg" alt="صورة">'],
+    ["القوائم", "تعلم إنشاء القوائم المرتبة وغير المرتبة.", "<ul>\n<li>HTML</li>\n<li>CSS</li>\n</ul>"],
+    ["الجداول", "تعلم إنشاء الجداول.", "<table><tr><td>اسم</td></tr></table>"],
+    ["الأزرار", "تعلم إضافة الأزرار.", "<button>اضغط هنا</button>"],
+    ["النماذج", "تعلم إنشاء نماذج… The King 👑: https://aistudio.google.com/apps/413ae7c9-23f2-4c0c-a2af-f3bd39582f25?showPreview=true
